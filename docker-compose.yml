@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+
+  db_postgres:
+    image: postgres
+    container_name: "db_postgres"
+    env_file: .env
+#    volumes:
+#      - .deploy/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
+    expose:
+      - "5445"
+    ports:
+      - "5445:5445"
+    command: -p 5445
+  db_mongo:
+    container_name: "db_mongo"
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=AzureDiamond
+      - MONGO_INITDB_ROOT_PASSWORD=hunter2
+    ports:
+      - '27017:27017'
+
+  db_redis:
+    container_name: "db_redis"
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  monolith:
+    container_name: "monolith"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - MONGODB_CONNSTRING=mongodb:27017//AzureDiamond:hunter2@mongodb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_postgres:5445/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '8083:8083'
+    depends_on:
+      - db_postgres
+      - db_mongo
+      - db_redis

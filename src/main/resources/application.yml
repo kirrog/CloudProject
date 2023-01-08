@@ -1,0 +1,23 @@
+server:
+    port: 8083
+
+spring:
+    jpa:
+        show-sql: true
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+        generate-ddl: false
+        properties:
+            hibernate:
+                show_sql=true
+        hibernate:
+            ddl-auto: update
+
+
+    datasource:
+        username: ${DB_USER:postgres}
+        password: ${DB_Password:postgres}
+        url: jdbc:postgresql://db:5444/postgres
+        driver-class-name: org.postgresql.Driver
+
+
