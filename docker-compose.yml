@@ -28,6 +28,7 @@ services:
   db_redis:
     container_name: "db_redis"
     image: "redis:alpine"
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     ports:
       - "6379:6379"
 
@@ -42,6 +43,9 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - REDIS_HOST=db_redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     ports:
       - '8083:8083'
     depends_on:
