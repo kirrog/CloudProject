@@ -13,11 +13,22 @@ spring:
         hibernate:
             ddl-auto: update
 
+    redis:
+        host: db_redis
+        port: 6379
+
+    data:
+      redis:
+          repositories:
+              enabled: true
+      mongodb:
+          host: db_mongo
+          port: 27017
 
     datasource:
         username: ${DB_USER:postgres}
         password: ${DB_Password:postgres}
-        url: jdbc:postgresql://db:5444/postgres
+        url: jdbc:postgresql://db_postgres:5445/postgres
         driver-class-name: org.postgresql.Driver
 
 
