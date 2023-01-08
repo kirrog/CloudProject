@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ifmo.cloudproject.model.dto.DelTagRequestDTO;
 import ru.ifmo.cloudproject.model.dto.TextResponseDTO;
+import ru.ifmo.cloudproject.service.DelTagService;
 
 @RestController
 @RequestMapping(path = "/del/tag")
 @RequiredArgsConstructor
 public class RestControllerDelTag {
+    private final DelTagService delTagService;
     @DeleteMapping
     public ResponseEntity<TextResponseDTO> delTagByName(@RequestBody DelTagRequestDTO delTagRequestDTO) {
-        return ResponseEntity.ok(TextResponseDTO.builder().text("text").code(0).build());
+        return ResponseEntity.ok(delTagService.delTagByName(delTagRequestDTO));
     }
 }

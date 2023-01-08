@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ifmo.cloudproject.model.dto.AddDocRequestDTO;
 import ru.ifmo.cloudproject.model.dto.TextResponseDTO;
+import ru.ifmo.cloudproject.service.AddDocService;
 
 @RestController
 @RequestMapping(path = "/add/doc")
 @RequiredArgsConstructor
 public class RestControllerAddDoc {
+
+    private final AddDocService addDocService;
+
     @PostMapping
     public ResponseEntity<TextResponseDTO> addDoc(@RequestBody AddDocRequestDTO addDocRequestDTO) {
-        return ResponseEntity.ok(TextResponseDTO.builder().text("text").code(0).build());
+        return ResponseEntity.ok(addDocService.addDoc(addDocRequestDTO));
     }
 }
