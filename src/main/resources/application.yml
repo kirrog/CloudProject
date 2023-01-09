@@ -24,6 +24,10 @@ spring:
       mongodb:
           host: db_mongo
           port: 27017
+          username: AzureDiamond
+          password: hunter2
+          authentication-database: admin
+
 
     datasource:
         username: ${DB_USER:postgres}
