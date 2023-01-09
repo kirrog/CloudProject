@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Builder
 @AllArgsConstructor
-public class TagsPG {
+public class TagPG {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;

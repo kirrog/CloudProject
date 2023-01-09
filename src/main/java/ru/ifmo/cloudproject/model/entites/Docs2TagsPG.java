@@ -21,5 +21,5 @@ public class Docs2TagsPG {
     private DocumentPG docId;
     @ManyToOne
     @JoinColumn(name = "tagId", referencedColumnName = "id", nullable = false)
-    private TagsPG tagId;
+    private TagPG tagId;
 }

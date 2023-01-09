@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class AddDocRequestDTO {
-    private String docId;
     private String text;
+    private String filename;
 }
